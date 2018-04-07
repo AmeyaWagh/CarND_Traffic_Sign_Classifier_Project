@@ -1,2 +1,6 @@
 dataSet/
 .ipynb_checkpoints/
+checkpoint
+*.data*
+*.index
+*.meta
