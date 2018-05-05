@@ -165,7 +165,7 @@ LeNet architecture is a pretty fundamental model of convolutional neural network
 | Description           		 						   | Value  					|
 |:--------------------------------------------------------:|:---------------------------|
 | training set accuracy of     						   	   | 0.996					 	|
-| validation set accuracy of 					           | 0.996 				     	|
+| validation set accuracy of 					           | 0.938 				     	|
 | test set accuracy of 					                   | 0.935 						|
 
 <!-- If an iterative approach was chosen:
