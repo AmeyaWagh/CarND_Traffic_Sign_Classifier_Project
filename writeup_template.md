@@ -86,11 +86,17 @@ My final model consisted of the following layers:
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
+| Input         		| 32x32x1 normalized gray scale image   		| 
+| Convolution 3x3     	| 1x1 stride, VALID padding, outputs 32x32x64 	|
 | RELU					|												|
 | Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
+| Convolution 3x3     	| 1x1 stride, VALID padding, outputs 32x32x64 	|
+| RELU					|												|
+| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
+| Convolution 3x3     	| 1x1 stride, VALID padding, outputs 32x32x64 	|
+| RELU					|												|
+| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
+| Flatten			    | etc.      									|
 | Fully connected		| etc.        									|
 | Softmax				| etc.        									|
 |						|												|
@@ -137,13 +143,13 @@ The first image might be difficult to classify because ...
 
 Here are the results of the prediction:
 
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Image			        							|     Prediction	        					| 
+|:-------------------------------------------------:|:---------------------------------------------:| 
+| Right-of-way at the next intersection      		| Right-of-way at the next intersection  		| 
+| Stop     											| Stop 											|
+| Yield												| Yield											|
+| Speed limit (70km/h)	      						| Speed limit (70km/h)					 		|
+| Speed limit (30km/h)								| Speed limit (50km/h)      					|
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
@@ -154,18 +160,73 @@ The code for making predictions on my final model is located in the 11th cell of
 
 For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
 
+
+##### Predictions for 5 images and their confidences
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| 1.00         			| Right-of-way at the next intersection   		| 
+| 0.999995     			| Stop 											|
+| 1.0					| Yield											|
+| 0.999917	      		| Speed limit (70km/h)					 		|
+| 0.90177				| Speed limit (50km/h)      					|
+
+
+
+
+##### Image 1. Right-of-way at the next intersection
+| predictions 												   | Probabilities	 |
+|:------------------------------------------------------------:|:---------------:|
+|Right-of-way at the next intersection                         | 1.0			 |
+|Pedestrians                                                   | 3.2227e-15		 |
+|Double curve                                                  | 4.55075e-17	 |
+|Roundabout mandatory                                          | 1.11581e-17	 |
+|Go straight or left                                           | 5.25451e-18	 |
+
+
+##### Image 2. Stop
+| predictions 												   | Probabilities	 |
+|:------------------------------------------------------------:|:---------------:|
+|Stop                                                          | 0.999995		 |
+|Turn left ahead                                               | 1.9348e-06		 |
+|Go straight or left                                           | 1.20174e-06	 |
+|Keep left                                                     | 9.13656e-07	 |
+|Turn right ahead                                              | 2.61988e-07	 |
+
+
+##### Image 3. Yield
+| predictions 												   | Probabilities	 |
+|:------------------------------------------------------------:|:---------------:|
+|Yield                                                         | 1.0			 |
+|Speed limit (30km/h)                                          | 5.39172e-31	 |
+|Speed limit (50km/h)                                          | 6.28297e-34 	 |
+|End of no passing by vehicles over 3.5 metric tons            | 4.54861e-34	 |
+|Ahead only                                                    | 2.21658e-34 	 |
+
+
+##### Image 4. actual Speed limit (70km/h)
+| predictions 												   | Probabilities	 |
+|:------------------------------------------------------------:|:---------------:|
+|Speed limit (70km/h)                                          | 0.999917		 |
+|Speed limit (20km/h)                                          | 8.32727e-05	 |
+|Keep left                                                     | 1.60437e-07	 |
+|Speed limit (30km/h)                                          | 4.06573e-10 	 |
+|Speed limit (80km/h)                                          | 2.2947e-14		 |
+
+
+##### Image 5. actual Speed limit (30km/h)
+| predictions 												   | Probabilities	 |
+|:------------------------------------------------------------:|:---------------:|
+|Speed limit (50km/h)                                          | 0.90177		 |
+|Speed limit (30km/h)                                          | 0.0982267		 |
+|Keep right                                                    | 3.6065e-06		 |
+|Speed limit (20km/h)                                          | 4.38543e-08	 |
+|Go straight or left                                           | 1.30004e-09	 |
+
 
 
 For the second image ... 
 
-### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
+<!-- ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
-
+ -->
