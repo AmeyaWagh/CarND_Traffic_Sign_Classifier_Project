@@ -52,21 +52,18 @@ The data set is shuffled before training to avoid bias in the network
 
 My final model consisted of the following layers:
 
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x1 normalized gray scale image   		| 
-| Convolution 3x3     	| 1x1 stride, VALID padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3     	| 1x1 stride, VALID padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3     	| 1x1 stride, VALID padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Flatten			    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
+| Layer         		|     Description	        					| Input  	| Output 	|
+|:---------------------:|:---------------------------------------------:|:---------:|:---------:|
+| Input         		| 32x32x1 normalized gray scale image   		| 32x32x1   | 32x32x1   | 
+| Convolution 3x3     	| 1x1 stride, VALID padding, activation RELU 	| 32x32x1   | 28x28x48  |
+| Max pooling	      	| 2x2 stride,  2x2 kernel        				| 28x28x48  | 14x14x48  |
+| Convolution 3x3     	| 1x1 stride, VALID padding, activation RELU 	| 14x14x48  | 10x10x96  |
+| Max pooling	      	| 2x2 stride,  2x2 kernel	 					| 10x10x96  | 5x5x96    |
+| Convolution 3x3     	| 1x1 stride, VALID padding, activation RELU 	| 5x5x96    | 3x3x172   |
+| Max pooling	      	| 2x2 stride,  2x2 kernel	 					| 3x3x172   | 2x2x172   |
+| Flatten			    | flattens the the 2D layer to a vector         | 2x2x172   | 688       |
+| Fully connected		| Artificial NN with activation  RELU           | 688       | 84        |
+| Fully connected	    | Artificial NN with softmax probabilities      | 84        | 43        |
  
 ##### The full model architecture is as follows:
 ```python
@@ -167,9 +164,9 @@ LeNet architecture is a pretty fundamental model of convolutional neural network
 ##### My final model results:
 | Description           		 						   | Value  					|
 |:--------------------------------------------------------:|:---------------------------|
-| training set accuracy of     						   	   | 34799					 	|
-| validation set accuracy of 					           | 4410 				     	|
-| test set accuracy of 					                   | (34799, 32, 32, 3) 		|
+| training set accuracy of     						   	   | 0.996					 	|
+| validation set accuracy of 					           | 0.996 				     	|
+| test set accuracy of 					                   | 0.935 						|
 
 <!-- If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
